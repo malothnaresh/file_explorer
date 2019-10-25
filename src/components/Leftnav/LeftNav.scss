@@ -1,0 +1,21 @@
+ul.hierarchy {
+  overflow: auto;
+  padding-left: 10px;
+  li {
+    line-height: 20px;
+    label.left-nav-label {
+      cursor: pointer;
+      display: block;
+      padding: 0.5rem;
+    }
+    label.left-nav-label:hover{
+      background-color: aliceblue;
+    }
+    label.left-nav-label + ul {
+      display: none;
+    }
+    label.left-nav-label.open + ul{
+      display: block;
+    }
+  }
+}

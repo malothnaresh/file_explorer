@@ -1,0 +1,10 @@
+.main-container {
+    display: flex;
+    .left-menu {
+        flex: 1;
+        background-color: #F9FAFC;
+    }
+    .display-container {
+        flex: 4;
+    }
+}
