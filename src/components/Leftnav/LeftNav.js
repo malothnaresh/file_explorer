@@ -30,7 +30,7 @@ const LeftNav = props => {
 
   const renderSubItems = item => {
     const { subItems, level } = item;
-    if (subItems.length) {
+    if (Object.keys(subItems).length) {
       return renderLeftNav(subItems, level);
     }
   };
@@ -38,13 +38,12 @@ const LeftNav = props => {
   const renderLeftNav = (list, level) => {
     return (
       <ul className={`hierarchy level-${level}`}>
-        {list.map(item => {
-          return renderMenuItem(item);
+        {Object.keys(list).map(key => {
+          return renderMenuItem(list[key]);
         })}
       </ul>
     );
   };
-
   return <div className="left-menu">{renderLeftNav(leftnav, 0)}</div>;
 };
 
