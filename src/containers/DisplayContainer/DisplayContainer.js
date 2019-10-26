@@ -8,52 +8,44 @@ import "./DisplayContainer.scss";
 class DisplayContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-      list: [
-        {
-          label: "Folder",
-          value: "folder"
-        },
-        {
-          label: "File",
-          value: "file"
-        }
-      ]
-    };
   }
 
   onClick = item => {
     console.log("On menu click: ", item);
   };
 
-  handleClick = () => {
-    const { isOpen } = this.state;
-    if (isOpen) {
-      this.setState({ isOpen: !isOpen });
-    }
-  };
+  handleClick = () => {};
 
   handleContextMenu = event => {
     event.preventDefault();
-    const { isOpen } = this.state;
-    if (!isOpen) {
-      this.setState({ isOpen: !isOpen });
-    }
+  };
+
+  navigateUpHandler = folder => {
+    console.log(folder);
+  };
+
+  onSearchHandler = event => {
+    console.log(event.target.value);
   };
 
   render() {
+    const { folder, leftnav } = this.props;
     return (
       <div
         className="display-container"
         onClick={this.handleClick}
         onContextMenu={this.handleContextMenu}
       >
-        <BreadCrumb />
-        <Menu
-          list={this.state.list}
-          isOpen={this.state.isOpen}
-          onClick={this.onClick}
+        <BreadCrumb
+          folder={folder}
+          leftnav={leftnav}
+          onClickHandler={this.navigateUpHandler}
+        />
+        <input
+          className="files-search"
+          type="text"
+          placeholder="Search for anything"
+          onChange={this.onSearchHandler}
         />
       </div>
     );

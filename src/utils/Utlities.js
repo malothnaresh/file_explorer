@@ -16,4 +16,18 @@ const toggleMenuUtil = (menu, item) => {
   return menu;
 };
 
-export { toggleMenuUtil };
+const buildLabels = (parents, menu) => {
+  const labels = [];
+  if (parents.length) {
+    let subMenu = menu;
+    for (let i = 0; i < parents.length; i++) {
+      if (subMenu) {
+        labels.push(subMenu[parents[i]].label);
+        subMenu = subMenu[parents[i]].subItems;
+      }
+    }
+  }
+  return labels;
+};
+
+export { toggleMenuUtil, buildLabels };

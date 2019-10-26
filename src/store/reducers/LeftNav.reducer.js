@@ -17,6 +17,7 @@ const initialState = {
           id: "abc-1abc-1",
           isOpen: false,
           parents: ["abcabc"],
+          breadCrumb: ["Abc"],
           subItems: {}
         },
         "abc-2abc-2": {
@@ -25,6 +26,7 @@ const initialState = {
           id: "abc-2abc-2",
           isOpen: false,
           parents: ["abcabc"],
+          breadCrumb: ["Abc-2"],
           subItems: {
             "abc-1-1abc-1-1": {
               level: 2,
@@ -32,6 +34,7 @@ const initialState = {
               id: "abc-1-1abc-1-1",
               isOpen: false,
               parents: ["abcabc", "abc-2abc-2"],
+              breadCrumb: ["Abc", "Abc-2"],
               subItems: {}
             },
             "abc-2-1abc-2-1": {

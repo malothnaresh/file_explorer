@@ -1,5 +1,13 @@
-.bread-crumb {
-    height: 25px;
-    border-bottom: 1px solid gray;
-    padding: 15px;
+.breadcrumb-container {
+  .breadcrumb-list{
+    li{
+      display: inline-block;
+      padding-right: 5px;
+      font-size: 16px;
+      color: #81878C;
+    }
+    .breadcrumb-up {
+      cursor: pointer;
+    }
+  } 
 }
