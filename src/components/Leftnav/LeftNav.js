@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { FaSortDown, FaSortUp } from "react-icons/fa";
+
 import { toggleMenuAction } from "../../store/actions/Leftnav.action";
 
 import "./LeftNav.scss";
 
 const LeftNav = props => {
   const { leftnav, toggleMenu } = props;
-  const onMenuClick = (event, item) => {
-    const { classList } = event.target;
-    classList.toggle("open");
+  const onMenuClick = item => {
     toggleMenu(item);
   };
 
@@ -17,13 +17,11 @@ const LeftNav = props => {
     const { label, id } = item;
     return (
       <li key={id}>
-        <label
-          className="left-nav-label"
-          onClick={$event => onMenuClick($event, item)}
-        >
+        <label className="left-nav-label" onClick={() => onMenuClick(item)}>
           {label}
+          {item.isOpen ? <FaSortUp /> : <FaSortDown />}
         </label>
-        {renderSubItems(item)}
+        {item.isOpen ? renderSubItems(item) : null}
       </li>
     );
   };
