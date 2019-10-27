@@ -1,18 +1,29 @@
 .display-container {
   height: 100vh;
-  width: 100%;
-  padding: 1rem;
-  height: 20px;
-  display: flex;
-  .breadcrumb-container {
-    flex: 4;
+  .header-container {
+    display: flex;
+    padding: 1rem;
+    height: 20px;
+    display: flex;
+    .breadcrumb-container {
+      flex: 4;
+    }
+    .files-search {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid #DDE0E4;
+      border-radius: 8px;
+      padding: 0.5rem;
+      height: 15px;
+    }
   }
-  .files-search {
-    flex: 1;
-    background: #FFFFFF;
-    border: 1px solid #DDE0E4;
-    border-radius: 8px;
-    padding: 0.5rem;
-    height: 15px;
+  .folder-container {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    li {
+      text-align: center;
+      padding-right: 2rem;
+    }
   }
 }

@@ -1,3 +1,9 @@
+// Author: Maloth Naresh
+// Utility class for multiple utility functions
+
+// Toggle active folder
+// Takes current folder, leftnav menu
+// Toggles current folder flag to open / close
 const toggleMenuUtil = (menu, item) => {
   if (item.level === 0) {
     if ("isOpen" in menu[item.id]) {
@@ -16,7 +22,10 @@ const toggleMenuUtil = (menu, item) => {
   return menu;
 };
 
-const buildLabels = (parents, menu) => {
+// Builds labels for breadcrumb or similar scenario
+// Takes leftnav menu and current item parents list
+// Navigate through menu and builds labels array
+const buildLabelsUtil = (parents, menu) => {
   const labels = [];
   if (parents.length) {
     let subMenu = menu;
@@ -30,4 +39,19 @@ const buildLabels = (parents, menu) => {
   return labels;
 };
 
-export { toggleMenuUtil, buildLabels };
+// Find parent to navigate up
+// Takes leftnav menu and current item parents list
+// Navigate through menu and return parent
+const findParentUtil = (parents, menu) => {
+  let subMenu = menu;
+  let parentMenu = "";
+  for (let i = 0; i < parents.length; i++) {
+    if (subMenu) {
+      parentMenu = subMenu;
+      subMenu = subMenu[parents[i]].subItems;
+    }
+  }
+  return parentMenu[parents[parents.length - 1]];
+};
+
+export { toggleMenuUtil, buildLabelsUtil, findParentUtil };

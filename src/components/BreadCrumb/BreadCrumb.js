@@ -1,6 +1,6 @@
 import React from "react";
 
-import { buildLabels } from "./../../utils/Utlities";
+import { buildLabelsUtil } from "./../../utils/Utlities";
 
 import { FaArrowCircleUp } from "react-icons/fa";
 
@@ -12,7 +12,7 @@ const BreadCrumb = props => {
     const { parents } = folder;
     let route = [];
     if (parents) {
-      route = route.concat(buildLabels(parents, leftnav));
+      route = route.concat(buildLabelsUtil(parents, leftnav));
     }
     route.push(folder.label);
     return (

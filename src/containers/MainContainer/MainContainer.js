@@ -1,12 +1,15 @@
+// Author: Maloth Naresh
+// Main component [smart component].
+// Placeholder for leftnav, display container
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { toggleMenuAction } from "../../store/actions/Leftnav.action";
-
 import LeftNav from "./../../components/Leftnav/LeftNav";
 import DisplayContainer from "./../DisplayContainer/DisplayContainer";
-
 import "./MainContainer.scss";
+
+import { findParentUtil } from "./../../utils/Utlities";
 
 class MainContainer extends Component {
   constructor(props) {
@@ -14,7 +17,7 @@ class MainContainer extends Component {
     const { leftnav } = props;
     this.state = {
       leftnav: leftnav,
-      currentFolder: ""
+      currentFolder: {}
     };
   }
 
@@ -25,6 +28,17 @@ class MainContainer extends Component {
     });
   };
 
+  // From breadcrumb, navigating to parent
+  // Replace current folder state with parent
+  navigateUpHandler = folder => {
+    const { parents } = folder;
+    const { leftnav } = this.props;
+    const parent = findParentUtil(parents, leftnav);
+    this.setState({
+      currentFolder: { ...parent }
+    });
+  };
+
   render() {
     return (
       <div className="main-container">
@@ -32,6 +46,7 @@ class MainContainer extends Component {
         <DisplayContainer
           leftnav={this.state.leftnav}
           folder={this.state.currentFolder}
+          navigateUpHandler={this.navigateUpHandler}
         />
       </div>
     );

@@ -9,6 +9,7 @@ const initialState = {
       label: "Abc",
       id: "abcabc",
       isOpen: false,
+      isFolder: true,
       parents: [],
       subItems: {
         "abc-1abc-1": {
@@ -16,8 +17,8 @@ const initialState = {
           label: "Abc-1",
           id: "abc-1abc-1",
           isOpen: false,
+          isFolder: false,
           parents: ["abcabc"],
-          breadCrumb: ["Abc"],
           subItems: {}
         },
         "abc-2abc-2": {
@@ -25,16 +26,16 @@ const initialState = {
           label: "Abc-2",
           id: "abc-2abc-2",
           isOpen: false,
+          isFolder: true,
           parents: ["abcabc"],
-          breadCrumb: ["Abc-2"],
           subItems: {
             "abc-1-1abc-1-1": {
               level: 2,
               label: "Abc-1-1",
               id: "abc-1-1abc-1-1",
               isOpen: false,
+              isFolder: false,
               parents: ["abcabc", "abc-2abc-2"],
-              breadCrumb: ["Abc", "Abc-2"],
               subItems: {}
             },
             "abc-2-1abc-2-1": {
@@ -42,6 +43,7 @@ const initialState = {
               label: "Abc-2-1",
               id: "abc-2-1abc-2-1",
               isOpen: false,
+              isFolder: false,
               parents: ["abcabc", "abc-2abc-2"],
               subItems: {}
             }
@@ -54,6 +56,7 @@ const initialState = {
       label: "Def",
       id: "defdef",
       isOpen: false,
+      isFolder: true,
       parents: [],
       subItems: {
         "abc-1abc-1": {
@@ -61,6 +64,7 @@ const initialState = {
           label: "Abc-1",
           id: "abc-1abc-1",
           isOpen: false,
+          isFolder: false,
           parents: ["defdef"],
           subItems: {}
         },
@@ -69,6 +73,7 @@ const initialState = {
           label: "Abc-2",
           id: "abc-2abc-2",
           isOpen: false,
+          isFolder: true,
           parents: ["defdef"],
           subItems: {
             "abc-1-1abc-1-1": {
@@ -76,6 +81,7 @@ const initialState = {
               label: "Abc-1-1",
               id: "abc-1-1abc-1-1",
               isOpen: false,
+              isFolder: false,
               parents: ["defdef", "abc-2abc-2"],
               subItems: {}
             },
@@ -84,6 +90,7 @@ const initialState = {
               label: "Abc-2-1",
               id: "abc-2-1abc-2-1",
               isOpen: false,
+              isFolder: false,
               parents: ["defdef", "abc-2abc-2"],
               subItems: {}
             }
@@ -96,10 +103,12 @@ const initialState = {
 
 const addMenu = (menu, data) => {
   console.log("Add menu");
+  return menu;
 };
 
 const removeMenu = (menu, data) => {
   console.log("Remove menu");
+  return menu;
 };
 
 const toggleMenu = (menu, data) => {
@@ -107,25 +116,36 @@ const toggleMenu = (menu, data) => {
   return menu;
 };
 
+const renameContent = (menu, data) => {
+  console.log(data);
+  return menu;
+};
+
 const LeftNav = (state = initialState, action = null) => {
   const { type, data } = action;
   switch (type) {
-    case ACTIONS.LEFTNAV.ADD_MENU: {
+    case ACTIONS.LEFTNAV.ADD_CONTENT: {
       return {
         ...state,
-        menu: addMenu(this.state.menu, data)
+        menu: { ...addMenu(this.state.menu, data) }
       };
     }
-    case ACTIONS.LEFTNAV.REMOVE_MENU: {
+    case ACTIONS.LEFTNAV.REMOVE_CONTENT: {
       return {
         ...state,
-        menu: removeMenu(this.state.menu, data)
+        menu: { ...removeMenu(this.state.menu, data) }
       };
     }
     case ACTIONS.LEFTNAV.TOGGLE_MENU: {
       return {
         ...state,
         menu: { ...toggleMenu(state.menu, data) }
+      };
+    }
+    case ACTIONS.LEFTNAV.RENAME_CONTENT: {
+      return {
+        ...state,
+        menu: { ...renameContent(state.menu, data) }
       };
     }
     default: {
