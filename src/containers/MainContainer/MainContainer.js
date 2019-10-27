@@ -9,7 +9,12 @@ import LeftNav from "./../../components/Leftnav/LeftNav";
 import DisplayContainer from "./../DisplayContainer/DisplayContainer";
 import "./MainContainer.scss";
 
-import { findParentUtil } from "./../../utils/Utlities";
+import { findParentUtil, findChildUtil } from "./../../utils/Utlities";
+import {
+  genericContextMenu,
+  folderContextMenu,
+  fileContextMenu
+} from "./../../utils/constants";
 
 class MainContainer extends Component {
   constructor(props) {
@@ -17,7 +22,9 @@ class MainContainer extends Component {
     const { leftnav } = props;
     this.state = {
       leftnav: leftnav,
-      currentFolder: {}
+      currentFolder: {},
+      contextMenu: genericContextMenu,
+      isConextMenuOpen: true
     };
   }
 
@@ -39,14 +46,48 @@ class MainContainer extends Component {
     });
   };
 
+  // Navigate down to children
+  // Replace current folder state with child
+  navigateDownHandler = folder => {
+    const { parents } = folder;
+    const { leftnav } = this.props;
+    const children = findChildUtil(folder, parents, leftnav);
+    this.setState({
+      currentFolder: { ...children }
+    });
+  };
+
+  // Takes clicked file / folder or open space
+  // In Constants.js, have defined 3 set of menu contexts
+  // Update context state based on item
+  changeContextMenu = item => {
+    let { contextMenu } = this.state;
+    if (item) {
+      contextMenu = folderContextMenu;
+      if (!item.isFolder) {
+        contextMenu = fileContextMenu;
+      }
+    }
+    this.setState({ contextMenu: contextMenu });
+  };
+
   render() {
+    const {
+      leftnav,
+      currentFolder,
+      contextMenu,
+      isConextMenuOpen
+    } = this.state;
     return (
       <div className="main-container">
-        <LeftNav leftnav={this.state.leftnav} toggleMenu={this.toggleMenu} />
+        <LeftNav leftnav={leftnav} toggleMenu={this.toggleMenu} />
         <DisplayContainer
-          leftnav={this.state.leftnav}
-          folder={this.state.currentFolder}
+          leftnav={leftnav}
+          folder={currentFolder}
           navigateUpHandler={this.navigateUpHandler}
+          contextMenu={contextMenu}
+          isConextMenuOpen={isConextMenuOpen}
+          changeContextMenu={this.changeContextMenu}
         />
       </div>
     );

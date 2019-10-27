@@ -4,6 +4,7 @@
 import React, { Component } from "react";
 import BreadCrumb from "./../../components/BreadCrumb/BreadCrumb";
 import { fileIcon, folderIcon } from "./../../assets";
+import Menu from "./../../components/Menu/Menu";
 
 import "./DisplayContainer.scss";
 
@@ -20,22 +21,32 @@ class DisplayContainer extends Component {
 
   // Prevent right click to open browser default menu
   // Activate custom menu
-  handleContextMenu = event => {
-    event.preventDefault();
+  handleContextMenu = (event, item) => {
+    event.preventDefault(); // Stop default context menu
+    event.stopPropagation(); // Stop propagating to parents
+    this.props.changeContextMenu(item);
   };
 
-  // Search a folder / file global / local
+  contextMenuSelectionHandler = (event, item) => {
+    console.log("On menu selection");
+  };
+
+  // Search a folder / file, global / local
   // Replace entire display container contents with results containers
   onSearchHandler = event => {
     console.log(event.target.value);
   };
 
+  // Render a folder contents
   renderContents = folder => {
     const { subItems } = folder;
     if (subItems) {
       const keys = Object.keys(subItems);
       return keys.map(key => (
-        <li key={subItems[key].id}>
+        <li
+          key={subItems[key].id}
+          onContextMenu={event => this.handleContextMenu(event, subItems[key])}
+        >
           <div className="icon-container">
             <img
               src={subItems[key].isFolder ? folderIcon : fileIcon}
@@ -51,12 +62,18 @@ class DisplayContainer extends Component {
   };
 
   render() {
-    const { folder, leftnav, navigateUpHandler } = this.props;
+    const {
+      folder,
+      leftnav,
+      contextMenu,
+      isConextMenuOpen,
+      navigateUpHandler
+    } = this.props;
     return (
       <div
         className="display-container"
         onClick={this.handleClick}
-        onContextMenu={this.handleContextMenu}
+        onContextMenu={event => this.handleContextMenu(event, null)}
       >
         <div className="header-container">
           <BreadCrumb
@@ -64,6 +81,7 @@ class DisplayContainer extends Component {
             leftnav={leftnav}
             onClickHandler={navigateUpHandler}
           />
+          {/* TODO: Following in itself should be a component */}
           <input
             className="files-search"
             type="text"
@@ -72,6 +90,11 @@ class DisplayContainer extends Component {
           />
         </div>
         <ul className="folder-container">{this.renderContents(folder)}</ul>
+        <Menu
+          menu={contextMenu}
+          isOpen={isConextMenuOpen}
+          onClick={this.contextMenuSelectionHandler}
+        />
       </div>
     );
   }

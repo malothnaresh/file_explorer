@@ -1,12 +1,10 @@
 .menu-container {
-    z-index: 10;
-}
-
-ul.menu-list {
+  z-index: 10;
+  ul.menu-list {
     position: fixed;
-}
-
-ul li{
-    line-height: 2rem;
-    padding: 0.5rem;
+    li{
+      line-height: 2rem;
+      padding: 0.5rem;
+    }
+  }
 }

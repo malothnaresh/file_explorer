@@ -54,4 +54,18 @@ const findParentUtil = (parents, menu) => {
   return parentMenu[parents[parents.length - 1]];
 };
 
-export { toggleMenuUtil, buildLabelsUtil, findParentUtil };
+// Find children to navigate down
+// Takes leftnav menu and current item
+// Navigate through menu and return children
+const findChildUtil = (item, parents, menu) => {
+  let subMenu = menu;
+  for (let i = 0; i < parents.length; i++) {
+    if (subMenu) {
+      subMenu = subMenu[parents[i]].subItems;
+    }
+  }
+  console.log(subMenu.subItems[item.id]);
+  return subMenu[item.id];
+};
+
+export { toggleMenuUtil, buildLabelsUtil, findParentUtil, findChildUtil };

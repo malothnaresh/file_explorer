@@ -7,16 +7,23 @@ import "./LeftNav.scss";
 const LeftNav = props => {
   const { leftnav, toggleMenu } = props;
   const onMenuClick = item => {
-    toggleMenu(item);
+    if (item.isFolder) {
+      toggleMenu(item);
+    }
   };
 
   const renderMenuItem = item => {
     const { label, id } = item;
     return (
       <li key={id}>
-        <label className="left-nav-label" onClick={() => onMenuClick(item)}>
+        <label
+          className={`left-nav-label ${item.isFolder ? "pointer" : ""}`}
+          onClick={() => onMenuClick(item)}
+        >
           {label}
-          {item.isOpen ? <FaSortUp /> : <FaSortDown />}
+          {item.isFolder && (
+            <span>{item.isOpen ? <FaSortUp /> : <FaSortDown />}</span>
+          )}
         </label>
         {item.isOpen ? renderSubItems(item) : null}
       </li>

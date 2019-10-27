@@ -13,13 +13,19 @@ const BreadCrumb = props => {
     let route = [];
     if (parents) {
       route = route.concat(buildLabelsUtil(parents, leftnav));
+      route.push(folder.label);
     }
-    route.push(folder.label);
     return (
       <ul className="breadcrumb-list">
-        <span className="breadcrumb-up" onClick={() => onClickHandler(folder)}>
-          <FaArrowCircleUp />
-        </span>
+        {route.length ? (
+          <span
+            className="breadcrumb-up"
+            onClick={() => onClickHandler(folder)}
+          >
+            <FaArrowCircleUp />
+          </span>
+        ) : null}
+
         {route.map((item, index) => (
           <li key={item}>
             {item}

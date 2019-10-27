@@ -4,7 +4,6 @@ ul.hierarchy {
   li {
     line-height: 20px;
     label.left-nav-label {
-      cursor: pointer;
       display: block;
       padding: 0.5rem;
     }
@@ -14,5 +13,8 @@ ul.hierarchy {
     .arrow-icon {
       padding-top: 5px;
     }
+  }
+  .pointer {
+    cursor: pointer;
   }
 }

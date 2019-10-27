@@ -61,7 +61,7 @@ const initialState = {
       subItems: {
         "abc-1abc-1": {
           level: 1,
-          label: "Abc-1",
+          label: "Abc-12",
           id: "abc-1abc-1",
           isOpen: false,
           isFolder: false,
@@ -70,7 +70,7 @@ const initialState = {
         },
         "abc-2abc-2": {
           level: 1,
-          label: "Abc-2",
+          label: "Abc-22",
           id: "abc-2abc-2",
           isOpen: false,
           isFolder: true,
