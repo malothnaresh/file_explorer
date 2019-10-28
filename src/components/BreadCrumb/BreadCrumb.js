@@ -17,7 +17,7 @@ const BreadCrumb = props => {
     }
     return (
       <ul className="breadcrumb-list">
-        {route.length ? (
+        {route.length > 1 ? (
           <span
             className="breadcrumb-up"
             onClick={() => onClickHandler(folder)}

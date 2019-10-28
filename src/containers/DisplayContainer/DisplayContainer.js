@@ -13,12 +13,6 @@ class DisplayContainer extends Component {
     super(props);
   }
 
-  onClick = item => {
-    console.log("On menu click: ", item);
-  };
-
-  handleClick = () => {};
-
   // Prevent right click to open browser default menu
   // Activate custom menu
   handleContextMenu = (event, item) => {
@@ -27,8 +21,9 @@ class DisplayContainer extends Component {
     this.props.changeContextMenu(item);
   };
 
-  contextMenuSelectionHandler = (event, item) => {
-    console.log("On menu selection");
+  // Handler for context menu selector
+  contextMenuSelectionHandler = item => {
+    this.props.contextMenuSelectionHandler(item);
   };
 
   // Search a folder / file, global / local
@@ -72,8 +67,8 @@ class DisplayContainer extends Component {
     return (
       <div
         className="display-container"
-        onClick={this.handleClick}
         onContextMenu={event => this.handleContextMenu(event, null)}
+        onClick={() => this.contextMenuSelectionHandler("closeMenu")}
       >
         <div className="header-container">
           <BreadCrumb

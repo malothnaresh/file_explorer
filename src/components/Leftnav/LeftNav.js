@@ -13,19 +13,17 @@ const LeftNav = props => {
   };
 
   const renderMenuItem = item => {
-    const { label, id } = item;
+    const { label, id, isFolder, isOpen } = item;
     return (
       <li key={id}>
         <label
-          className={`left-nav-label ${item.isFolder ? "pointer" : ""}`}
+          className={`left-nav-label ${isFolder ? "pointer" : ""}`}
           onClick={() => onMenuClick(item)}
         >
           {label}
-          {item.isFolder && (
-            <span>{item.isOpen ? <FaSortUp /> : <FaSortDown />}</span>
-          )}
+          {isFolder && <span>{isOpen ? <FaSortUp /> : <FaSortDown />}</span>}
         </label>
-        {item.isOpen ? renderSubItems(item) : null}
+        {isOpen ? renderSubItems(item) : null}
       </li>
     );
   };

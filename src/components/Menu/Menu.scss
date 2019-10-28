@@ -1,10 +1,19 @@
+@import "./../../style/variables";
 .menu-container {
-  z-index: 10;
+  z-index: $z-index;
   ul.menu-list {
     position: fixed;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    min-width: 200px;
     li{
+      cursor: pointer;
       line-height: 2rem;
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+    li:hover {
+      background-color: $lightgray;
     }
   }
 }

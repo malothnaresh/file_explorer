@@ -6,18 +6,15 @@
 // Toggles current folder flag to open / close
 const toggleMenuUtil = (menu, item) => {
   if (item.level === 0) {
-    if ("isOpen" in menu[item.id]) {
-      menu[item.id].isOpen = !menu[item.id].isOpen;
-    }
+    menu[item.id].isOpen = !menu[item.id].isOpen;
   } else {
     let subMenu = menu;
     const { parents } = item;
     for (let i = 0; i < parents.length; i++) {
-      subMenu = subMenu && subMenu[parents[i]].subItems[item.id];
-      if (subMenu && "isOpen" in subMenu) {
-        subMenu.isOpen = !subMenu.isOpen;
-      }
+      subMenu[parents[i]].isOpen = true;
+      subMenu = subMenu[parents[i]].subItems;
     }
+    subMenu[item.id].isOpen = !subMenu[item.id].isOpen;
   }
   return menu;
 };
@@ -64,8 +61,38 @@ const findChildUtil = (item, parents, menu) => {
       subMenu = subMenu[parents[i]].subItems;
     }
   }
-  console.log(subMenu.subItems[item.id]);
   return subMenu[item.id];
 };
 
-export { toggleMenuUtil, buildLabelsUtil, findParentUtil, findChildUtil };
+// Travel menu upto current level
+// Add a file / folder as subItem to current folder
+const addContentUtil = (menu, item) => {
+  const currentItem = Object.assign({}, item);
+  const { id, level, parents } = currentItem;
+  const newItem = {
+    label: "New Item",
+    id: Math.random(),
+    level: level + 1,
+    isFolder: false,
+    isOpen: false,
+    parents: parents.concat([id]),
+    subItems: {}
+  };
+  let subMenu = menu;
+  for (let i = 0; i < parents.length; i++) {
+    if (subMenu) {
+      subMenu = subMenu[parents[i]].subItems;
+    }
+  }
+  console.log(subMenu[item.id]);
+  subMenu[item.id].subItems[Math.random()] = newItem;
+  return menu;
+};
+
+export {
+  toggleMenuUtil,
+  buildLabelsUtil,
+  findParentUtil,
+  findChildUtil,
+  addContentUtil
+};

@@ -4,17 +4,21 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { toggleMenuAction } from "../../store/actions/Leftnav.action";
+import {
+  toggleMenuAction,
+  addContentAction
+} from "../../store/actions/Leftnav.action";
 import LeftNav from "./../../components/Leftnav/LeftNav";
 import DisplayContainer from "./../DisplayContainer/DisplayContainer";
-import "./MainContainer.scss";
-
 import { findParentUtil, findChildUtil } from "./../../utils/Utlities";
 import {
   genericContextMenu,
   folderContextMenu,
   fileContextMenu
 } from "./../../utils/constants";
+import CreateForm from "./../../components/CreateForm/CreateForm";
+
+import "./MainContainer.scss";
 
 class MainContainer extends Component {
   constructor(props) {
@@ -22,9 +26,10 @@ class MainContainer extends Component {
     const { leftnav } = props;
     this.state = {
       leftnav: leftnav,
-      currentFolder: {},
-      contextMenu: genericContextMenu,
-      isConextMenuOpen: true
+      currentFolder: leftnav["root"],
+      selectedFolder: "",
+      contextMenu: [],
+      isConextMenuOpen: false
     };
   }
 
@@ -61,14 +66,46 @@ class MainContainer extends Component {
   // In Constants.js, have defined 3 set of menu contexts
   // Update context state based on item
   changeContextMenu = item => {
-    let { contextMenu } = this.state;
+    let contextMenu = genericContextMenu;
+    let { isConextMenuOpen } = this.state;
     if (item) {
       contextMenu = folderContextMenu;
       if (!item.isFolder) {
         contextMenu = fileContextMenu;
       }
     }
-    this.setState({ contextMenu: contextMenu });
+    this.setState({
+      contextMenu: contextMenu,
+      selectedFolder: item,
+      isConextMenuOpen: !isConextMenuOpen
+    });
+  };
+
+  // Takes menu string
+  // Decide menu functionality on folder based on selected option
+  contextMenuSelectionHandler = menu => {
+    switch (menu) {
+      case "Open":
+        const { selectedFolder } = this.state;
+        this.navigateDownHandler(selectedFolder);
+        break;
+      case "Delete":
+        console.log("Delete");
+        break;
+      case "Info":
+        console.log("return information");
+        break;
+      case "Add Content":
+        const { currentFolder } = this.state;
+        this.props.addFolder(currentFolder);
+        break;
+      case "closeMenu":
+        this.setState({ isConextMenuOpen: false });
+        break;
+      default:
+        console.log("default");
+        break;
+    }
   };
 
   render() {
@@ -88,14 +125,17 @@ class MainContainer extends Component {
           contextMenu={contextMenu}
           isConextMenuOpen={isConextMenuOpen}
           changeContextMenu={this.changeContextMenu}
+          contextMenuSelectionHandler={this.contextMenuSelectionHandler}
         />
+        <CreateForm currentFolder={currentFolder} />
       </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleMenu: data => dispatch(toggleMenuAction(data))
+  toggleMenu: data => dispatch(toggleMenuAction(data)),
+  addFolder: data => dispatch(addContentAction(data))
 });
 
 const mapStateToProps = state => ({

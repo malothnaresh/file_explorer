@@ -1,6 +1,6 @@
 import ACTIONS from "./actionTypes";
 
-export const addMenuAction = data => ({
+export const addContentAction = data => ({
   type: ACTIONS.LEFTNAV.ADD_CONTENT,
   data
 });

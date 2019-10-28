@@ -1,4 +1,4 @@
-const genericContextMenu = ["Add Folder", "Add File"];
+const genericContextMenu = ["Add Content"];
 const folderContextMenu = ["Open", "Info", "Delete"];
 const fileContextMenu = ["Info", "Delete"];
 
