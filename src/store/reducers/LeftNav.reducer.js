@@ -21,11 +21,6 @@ const removeMenu = (menu, data) => {
   return menu;
 };
 
-const renameContent = (menu, data) => {
-  console.log(data);
-  return menu;
-};
-
 const LeftNav = (state = initialState, action = null) => {
   const { type, data } = action;
   switch (type) {
@@ -45,12 +40,6 @@ const LeftNav = (state = initialState, action = null) => {
       return {
         ...state,
         menu: { ...toggleMenuUtil(state.menu, data) }
-      };
-    }
-    case ACTIONS.LEFTNAV.RENAME_CONTENT: {
-      return {
-        ...state,
-        menu: { ...renameContent(state.menu, data) }
       };
     }
     default: {

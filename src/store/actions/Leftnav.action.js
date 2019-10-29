@@ -14,8 +14,3 @@ export const toggleMenuAction = data => ({
   type: ACTIONS.LEFTNAV.TOGGLE_MENU,
   data
 });
-
-export const renameFolderAction = data => ({
-  type: ACTIONS.LEFTNAV.RENAME_CONTENT,
-  data
-});

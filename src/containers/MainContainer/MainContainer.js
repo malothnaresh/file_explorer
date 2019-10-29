@@ -10,7 +10,11 @@ import {
 } from "../../store/actions/Leftnav.action";
 import LeftNav from "./../../components/Leftnav/LeftNav";
 import DisplayContainer from "./../DisplayContainer/DisplayContainer";
-import { findParentUtil, findChildUtil } from "./../../utils/Utlities";
+import {
+  findParentUtil,
+  findChildUtil,
+  deleteContentUtil
+} from "./../../utils/Utlities";
 import {
   genericContextMenu,
   folderContextMenu,
@@ -63,6 +67,12 @@ class MainContainer extends Component {
     });
   };
 
+  deleteContent = folder => {
+    const { leftnav } = this.props;
+    const menu = deleteContentUtil(leftnav, folder);
+    console.log(menu);
+  };
+
   // Takes clicked file / folder or open space
   // In Constants.js, have defined 3 set of menu contexts
   // Update context state based on item
@@ -92,13 +102,13 @@ class MainContainer extends Component {
   // Takes menu string
   // Decide menu functionality on folder based on selected option
   contextMenuSelectionHandler = menu => {
+    const { selectedFolder } = this.state;
     switch (menu) {
       case "Open":
-        const { selectedFolder } = this.state;
         this.navigateDownHandler(selectedFolder);
         break;
       case "Delete":
-        console.log("Delete");
+        this.deleteContent(selectedFolder);
         break;
       case "Info":
         console.log("return information");
@@ -110,7 +120,7 @@ class MainContainer extends Component {
         this.setState({ isConextMenuOpen: false });
         break;
       default:
-        console.log("default");
+        console.log("Default");
         break;
     }
   };

@@ -81,10 +81,30 @@ const addContentUtil = (menu, data) => {
   return menu;
 };
 
+// Take menu, currentFolder
+// Travel menu upto current folder
+// Remove current folder from menu
+// Return menu
+const deleteContentUtil = (menu, folder) => {
+  const { id, parents } = folder;
+  let subMenu = menu;
+  for (let i = 0; i < parents.length; i++) {
+    if (subMenu) {
+      subMenu = subMenu[parents[i]].subItems;
+      if (subMenu[id]) {
+        delete subMenu[id];
+        return menu;
+      }
+    }
+  }
+  return menu;
+};
+
 export {
   toggleMenuUtil,
   buildLabelsUtil,
   findParentUtil,
   findChildUtil,
-  addContentUtil
+  addContentUtil,
+  deleteContentUtil
 };
