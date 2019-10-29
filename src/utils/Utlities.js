@@ -66,26 +66,18 @@ const findChildUtil = (item, parents, menu) => {
 
 // Travel menu upto current level
 // Add a file / folder as subItem to current folder
-const addContentUtil = (menu, item) => {
-  const currentItem = Object.assign({}, item);
-  const { id, level, parents } = currentItem;
-  const newItem = {
-    label: "New Item",
-    id: Math.random(),
-    level: level + 1,
-    isFolder: false,
-    isOpen: false,
-    parents: parents.concat([id]),
-    subItems: {}
-  };
+const addContentUtil = (menu, data) => {
+  const { currentFolder, formData } = data;
+  const { id, level, parents } = currentFolder;
+  formData["level"] = level + 1;
+  formData["parents"] = parents.concat([id]);
   let subMenu = menu;
   for (let i = 0; i < parents.length; i++) {
     if (subMenu) {
       subMenu = subMenu[parents[i]].subItems;
     }
   }
-  console.log(subMenu[item.id]);
-  subMenu[item.id].subItems[Math.random()] = newItem;
+  subMenu[id].subItems[formData["id"]] = formData;
   return menu;
 };
 

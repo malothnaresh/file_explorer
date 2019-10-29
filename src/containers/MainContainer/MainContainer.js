@@ -29,7 +29,8 @@ class MainContainer extends Component {
       currentFolder: leftnav["root"],
       selectedFolder: "",
       contextMenu: [],
-      isConextMenuOpen: false
+      isConextMenuOpen: false,
+      showCreateForm: false
     };
   }
 
@@ -81,6 +82,13 @@ class MainContainer extends Component {
     });
   };
 
+  onFormSubmitHandler = formData => {
+    const { currentFolder } = this.state;
+    const data = { currentFolder, formData };
+    this.props.addFolder(data);
+    this.setState({ showCreateForm: false });
+  };
+
   // Takes menu string
   // Decide menu functionality on folder based on selected option
   contextMenuSelectionHandler = menu => {
@@ -96,8 +104,7 @@ class MainContainer extends Component {
         console.log("return information");
         break;
       case "Add Content":
-        const { currentFolder } = this.state;
-        this.props.addFolder(currentFolder);
+        this.setState({ showCreateForm: true });
         break;
       case "closeMenu":
         this.setState({ isConextMenuOpen: false });
@@ -113,7 +120,8 @@ class MainContainer extends Component {
       leftnav,
       currentFolder,
       contextMenu,
-      isConextMenuOpen
+      isConextMenuOpen,
+      showCreateForm
     } = this.state;
     return (
       <div className="main-container">
@@ -127,7 +135,12 @@ class MainContainer extends Component {
           changeContextMenu={this.changeContextMenu}
           contextMenuSelectionHandler={this.contextMenuSelectionHandler}
         />
-        <CreateForm currentFolder={currentFolder} />
+        {showCreateForm && (
+          <CreateForm
+            currentFolder={currentFolder}
+            onSubmitHandler={this.onFormSubmitHandler}
+          />
+        )}
       </div>
     );
   }

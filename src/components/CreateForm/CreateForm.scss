@@ -36,6 +36,10 @@
       padding: 0.5rem;
       flex: 1;
     }
+    span.selected {
+      background: $blue1;
+      color: $white;
+    }
     span:nth-child(odd) {
       border-right: $generic-border;
     }
@@ -46,6 +50,6 @@
     width: 100%;
     background: $blue1;
     border-radius: $generic-radius;
-    color: #ffffff;
+    color: $white;
   }
 }

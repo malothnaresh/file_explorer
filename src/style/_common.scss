@@ -1,3 +1,5 @@
+@import "./variables";
+
 body {
   padding: 10px 0;
 }
@@ -13,4 +15,9 @@ textarea:focus, input:focus{
 
 .pointer {
   cursor: pointer;
+}
+
+.disabled {
+  background: $lightgray !important;
+  cursor: auto;
 }
