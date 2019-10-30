@@ -1,6 +1,10 @@
 import ACTIONS from "./../actions/actionTypes";
 
-import { toggleMenuUtil, addContentUtil } from "./../../utils/Utlities";
+import {
+  toggleMenuUtil,
+  addContentUtil,
+  deleteContentUtil
+} from "./../../utils/Utlities";
 
 const initialState = {
   menu: {
@@ -33,7 +37,7 @@ const LeftNav = (state = initialState, action = null) => {
     case ACTIONS.LEFTNAV.REMOVE_CONTENT: {
       return {
         ...state,
-        menu: { ...removeMenu(state.menu, data) }
+        menu: { ...deleteContentUtil(state.menu, data) }
       };
     }
     case ACTIONS.LEFTNAV.TOGGLE_MENU: {
