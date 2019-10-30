@@ -85,11 +85,9 @@ class DisplayContainer extends Component {
           />
         </div>
         <ul className="folder-container">{this.renderContents(folder)}</ul>
-        <Menu
-          menu={contextMenu}
-          isOpen={isConextMenuOpen}
-          onClick={this.contextMenuSelectionHandler}
-        />
+        {isConextMenuOpen && (
+          <Menu menu={contextMenu} onClick={this.contextMenuSelectionHandler} />
+        )}
       </div>
     );
   }

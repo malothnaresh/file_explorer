@@ -3,7 +3,8 @@ import React from "react";
 import "./Menu.scss";
 
 const Menu = props => {
-  const { menu, isOpen, onClick } = props;
+  // TODO: Positioning menu container
+  const { menu, onClick } = props;
 
   const renderMenuItem = (item, index) => {
     return (
@@ -14,11 +15,9 @@ const Menu = props => {
   };
   return (
     <div className="menu-container">
-      {isOpen && (
-        <ul className="menu-list">
-          {menu.map((item, index) => renderMenuItem(item, index))}
-        </ul>
-      )}
+      <ul className="menu-list">
+        {menu.map((item, index) => renderMenuItem(item, index))}
+      </ul>
     </div>
   );
 };
