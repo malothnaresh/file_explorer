@@ -11,6 +11,10 @@ import "./DisplayContainer.scss";
 class DisplayContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      pageX: 100,
+      pageY: 100
+    };
   }
 
   // Prevent right click to open browser default menu
@@ -18,6 +22,7 @@ class DisplayContainer extends Component {
   handleContextMenu = (event, item) => {
     event.preventDefault(); // Stop default context menu
     event.stopPropagation(); // Stop propagating to parents
+    this.setState({ pageX: event.pageX, pageY: event.pageY });
     this.props.changeContextMenu(item);
   };
 
@@ -86,7 +91,12 @@ class DisplayContainer extends Component {
         </div>
         <ul className="folder-container">{this.renderContents(folder)}</ul>
         {isConextMenuOpen && (
-          <Menu menu={contextMenu} onClick={this.contextMenuSelectionHandler} />
+          <Menu
+            menu={contextMenu}
+            pageX={this.state.pageX}
+            pageY={this.state.pageY}
+            onClick={this.contextMenuSelectionHandler}
+          />
         )}
       </div>
     );

@@ -4,7 +4,12 @@ import "./Menu.scss";
 
 const Menu = props => {
   // TODO: Positioning menu container
-  const { menu, onClick } = props;
+  const { menu, pageX, pageY, onClick } = props;
+
+  const style = {
+    left: pageX,
+    top: pageY
+  };
 
   const renderMenuItem = (item, index) => {
     return (
@@ -14,7 +19,7 @@ const Menu = props => {
     );
   };
   return (
-    <div className="menu-container">
+    <div className="menu-container" style={style}>
       <ul className="menu-list">
         {menu.map((item, index) => renderMenuItem(item, index))}
       </ul>

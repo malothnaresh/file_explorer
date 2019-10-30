@@ -6,7 +6,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   toggleMenuAction,
-  addContentAction
+  addContentAction,
+  removeContentAction
 } from "../../store/actions/Leftnav.action";
 import LeftNav from "./../../components/Leftnav/LeftNav";
 import DisplayContainer from "./../DisplayContainer/DisplayContainer";
@@ -70,9 +71,7 @@ class MainContainer extends Component {
   };
 
   deleteContent = folder => {
-    const { leftnav } = this.props;
-    const menu = deleteContentUtil(leftnav, folder);
-    console.log(menu);
+    this.props.removeFolder(folder);
   };
 
   // Takes clicked file / folder or open space
@@ -184,7 +183,8 @@ class MainContainer extends Component {
 
 const mapDispatchToProps = dispatch => ({
   toggleMenu: data => dispatch(toggleMenuAction(data)),
-  addFolder: data => dispatch(addContentAction(data))
+  addFolder: data => dispatch(addContentAction(data)),
+  removeFolder: data => dispatch(removeContentAction(data))
 });
 
 const mapStateToProps = state => ({

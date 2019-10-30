@@ -1,13 +1,14 @@
 @import "./../../style/variables";
 .menu-container {
   z-index: $z-index;
-  position: absolute;
+  position: fixed;
   ul.menu-list {
     position: fixed;
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.175);
     min-width: 200px;
+    background-color: $white;
     li{
       cursor: pointer;
       line-height: 2rem;
