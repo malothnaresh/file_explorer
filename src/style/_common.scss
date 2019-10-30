@@ -21,3 +21,8 @@ textarea:focus, input:focus{
   background: $lightgray !important;
   cursor: auto;
 }
+
+.no-pointer-events {
+  pointer-events: none;
+  opacity: 0.5;
+}

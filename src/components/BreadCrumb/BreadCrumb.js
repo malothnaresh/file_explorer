@@ -27,7 +27,10 @@ const BreadCrumb = props => {
         ) : null}
 
         {route.map((item, index) => (
-          <li key={item}>
+          <li
+            key={item}
+            className={`${index === route.length - 1 ? "active" : ""}`}
+          >
             {item}
             {index < route.length - 1 && <span> /</span>}
           </li>

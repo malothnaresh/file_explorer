@@ -6,12 +6,13 @@
   top: 15%;
   left: 40%;
   z-index: $z-index;
-  width: 15%;
+  min-width: 16%;
   border: $generic-border;
-  padding: 2.5rem;
+  padding: 1.5rem 2.5rem 2.5rem;
   border-radius: $generic-radius;
+  background-color: $white;
   .modal-header {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     h3.title {
       display: inline-block; 
     }

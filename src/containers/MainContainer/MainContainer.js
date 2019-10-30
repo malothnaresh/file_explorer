@@ -21,6 +21,7 @@ import {
   fileContextMenu
 } from "./../../utils/constants";
 import CreateForm from "./../../components/CreateForm/CreateForm";
+import FolderInfo from "./../../components/FolderInfo/FolderInfo";
 
 import "./MainContainer.scss";
 
@@ -34,7 +35,8 @@ class MainContainer extends Component {
       selectedFolder: "",
       contextMenu: [],
       isConextMenuOpen: false,
-      showCreateForm: false
+      showCreateForm: false,
+      showFolderInfo: false
     };
   }
 
@@ -99,6 +101,14 @@ class MainContainer extends Component {
     this.setState({ showCreateForm: false });
   };
 
+  closeCreateFormHandler = () => {
+    this.setState({ showCreateForm: false });
+  };
+
+  closeInfoModalHandler = () => {
+    this.setState({ showFolderInfo: false });
+  };
+
   // Takes menu string
   // Decide menu functionality on folder based on selected option
   contextMenuSelectionHandler = menu => {
@@ -111,7 +121,7 @@ class MainContainer extends Component {
         this.deleteContent(selectedFolder);
         break;
       case "Info":
-        console.log("return information");
+        this.setState({ showFolderInfo: true });
         break;
       case "Add Content":
         this.setState({ showCreateForm: true });
@@ -129,26 +139,42 @@ class MainContainer extends Component {
     const {
       leftnav,
       currentFolder,
+      selectedFolder,
       contextMenu,
       isConextMenuOpen,
-      showCreateForm
+      showCreateForm,
+      showFolderInfo
     } = this.state;
     return (
       <div className="main-container">
         <LeftNav leftnav={leftnav} toggleMenu={this.toggleMenu} />
-        <DisplayContainer
-          leftnav={leftnav}
-          folder={currentFolder}
-          navigateUpHandler={this.navigateUpHandler}
-          contextMenu={contextMenu}
-          isConextMenuOpen={isConextMenuOpen}
-          changeContextMenu={this.changeContextMenu}
-          contextMenuSelectionHandler={this.contextMenuSelectionHandler}
-        />
+        <div
+          className={`display-container ${
+            showCreateForm || showFolderInfo ? "no-pointer-events" : ""
+          }`}
+        >
+          <DisplayContainer
+            leftnav={leftnav}
+            folder={currentFolder}
+            navigateUpHandler={this.navigateUpHandler}
+            contextMenu={contextMenu}
+            isConextMenuOpen={isConextMenuOpen}
+            changeContextMenu={this.changeContextMenu}
+            contextMenuSelectionHandler={this.contextMenuSelectionHandler}
+          />
+        </div>
         {showCreateForm && (
           <CreateForm
             currentFolder={currentFolder}
             onSubmitHandler={this.onFormSubmitHandler}
+            closeCreateForm={this.closeCreateFormHandler}
+          />
+        )}
+
+        {showFolderInfo && (
+          <FolderInfo
+            data={selectedFolder}
+            onClose={this.closeInfoModalHandler}
           />
         )}
       </div>

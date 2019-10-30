@@ -1,3 +1,4 @@
+@import "./../../style/variables";
 .breadcrumb-container {
   .breadcrumb-list{
     li{
@@ -5,6 +6,9 @@
       padding-right: 5px;
       font-size: 16px;
       color: #81878C;
+    }
+    li.active {
+      color: $light-text-color;
     }
     .breadcrumb-up {
       cursor: pointer;
