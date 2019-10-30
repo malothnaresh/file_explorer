@@ -11,11 +11,7 @@ import {
 } from "../../store/actions/Leftnav.action";
 import LeftNav from "./../../components/Leftnav/LeftNav";
 import DisplayContainer from "./../DisplayContainer/DisplayContainer";
-import {
-  findParentUtil,
-  findChildUtil,
-  deleteContentUtil
-} from "./../../utils/Utlities";
+import { findParentUtil, findChildUtil } from "./../../utils/Utlities";
 import {
   genericContextMenu,
   folderContextMenu,

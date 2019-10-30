@@ -20,11 +20,6 @@ const initialState = {
   }
 };
 
-const removeMenu = (menu, data) => {
-  console.log("Remove menu");
-  return menu;
-};
-
 const LeftNav = (state = initialState, action = null) => {
   const { type, data } = action;
   switch (type) {
