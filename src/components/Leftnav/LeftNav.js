@@ -1,27 +1,29 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { FaSortDown, FaSortUp } from "react-icons/fa";
-
-import { toggleMenuAction } from "../../store/actions/Leftnav.action";
 
 import "./LeftNav.scss";
 
 const LeftNav = props => {
   const { leftnav, toggleMenu } = props;
   const onMenuClick = item => {
-    toggleMenu(item);
+    if (item.isFolder) {
+      toggleMenu(item);
+    }
   };
 
   const renderMenuItem = item => {
-    const { label, id } = item;
+    const { label, id, isFolder, isOpen } = item;
     return (
       <li key={id}>
-        <label className="left-nav-label" onClick={() => onMenuClick(item)}>
+        <label
+          className={`left-nav-label ${isFolder ? "pointer" : ""}`}
+          onClick={() => onMenuClick(item)}
+        >
           {label}
-          {item.isOpen ? <FaSortUp /> : <FaSortDown />}
+          {isFolder && <span>{isOpen ? <FaSortUp /> : <FaSortDown />}</span>}
         </label>
-        {item.isOpen ? renderSubItems(item) : null}
+        {isOpen ? renderSubItems(item) : null}
       </li>
     );
   };
@@ -45,15 +47,4 @@ const LeftNav = props => {
   return <div className="left-menu">{renderLeftNav(leftnav, 0)}</div>;
 };
 
-const mapDispatchToProps = dispatch => ({
-  toggleMenu: data => dispatch(toggleMenuAction(data))
-});
-
-const mapStateToProps = state => ({
-  leftnav: state.leftnav.menu
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LeftNav);
+export default LeftNav;

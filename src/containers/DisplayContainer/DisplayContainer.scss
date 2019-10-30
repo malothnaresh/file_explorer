@@ -1,4 +1,30 @@
+@import './../../style/variables';
 .display-container {
-    height: 100vh;
-    width: 100%;
+  height: 100vh;
+  .header-container {
+    display: flex;
+    padding: 1rem;
+    height: 20px;
+    display: flex;
+    .breadcrumb-container {
+      flex: 4;
+    }
+    .files-search {
+      flex: 1;
+      background: #FFFFFF;
+      border: $generic-border;
+      border-radius: $generic-radius;
+      padding: 0.5rem;
+      height: 15px;
+    }
+  }
+  .folder-container {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    li {
+      text-align: center;
+      padding-right: 2rem;
+    }
+  }
 }

@@ -1,12 +1,12 @@
 import ACTIONS from "./actionTypes";
 
-export const addMenuAction = data => ({
-  type: ACTIONS.LEFTNAV.ADD_MENU,
+export const addContentAction = data => ({
+  type: ACTIONS.LEFTNAV.ADD_CONTENT,
   data
 });
 
-export const removeMenuAction = data => ({
-  type: ACTIONS.LEFTNAV.REMOVE_MENU,
+export const removeContentAction = data => ({
+  type: ACTIONS.LEFTNAV.REMOVE_CONTENT,
   data
 });
 

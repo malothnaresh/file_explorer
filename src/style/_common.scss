@@ -1,0 +1,28 @@
+@import "./variables";
+
+body {
+  padding: 10px 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.disabled {
+  background: $lightgray !important;
+  cursor: auto;
+}
+
+.no-pointer-events {
+  pointer-events: none;
+  opacity: 0.5;
+}

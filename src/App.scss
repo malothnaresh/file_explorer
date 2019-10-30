@@ -1,8 +1,3 @@
-body {
-  padding: 10px 0;
-}
-ul.hierarchy {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
+@import './../src/style/reset';
+@import './../src/style/common';
+@import './../src/style/variables';
